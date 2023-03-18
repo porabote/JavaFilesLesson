@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
 
@@ -45,6 +43,20 @@ public class Main {
 
     static void getGameState() throws IOException {
         Files.openZip("Games/savegames/archive.zip", "Games/savegames/");
+        openProgress("Games/savegames/save2.dat");
+    }
+
+    static void openProgress(String filePath) throws IOException {
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath)))
+        {
+            GameProgress gameProgress = (GameProgress) ois.readObject();
+            System.out.printf(gameProgress.toString());
+
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static void createSaveArchives() {
