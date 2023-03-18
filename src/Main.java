@@ -5,8 +5,9 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        createDirectories();
-        createSaveArchives();
+        createDirectories(); // Task1
+        createSaveArchives(); // Task2
+        getGameState(); // Task3
     }
 
     static void createDirectories() throws IOException {
@@ -42,6 +43,10 @@ public class Main {
 
     }
 
+    static void getGameState() throws IOException {
+        Files.openZip("Games/savegames/archive.zip", "Games/savegames/");
+    }
+
     static void createSaveArchives() {
 
         String savePath = "Games/savegames/";
@@ -57,12 +62,12 @@ public class Main {
 
         Files.zipFiles(
                 savePath + "archive.zip",
-                new String[] {
+                new String[]{
                         savePath + "save1.dat",
                         savePath + "save2.dat",
                         savePath + "save3.dat"
                 }
-                );
+        );
 
     }
 
